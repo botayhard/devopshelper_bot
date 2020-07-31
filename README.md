@@ -2,6 +2,10 @@
 
 This bot used for helping in administation and moderation DevOps groups in telegram. Used [Python telegram bot](https://github.com/python-telegram-bot/python-telegram-bot).
 
+## History
+
+Was published from private repo on version `v2.1.0`
+
 ## Badges
 
 [![Known Vulnerabilities](https://snyk.io/test/github/Asgoret/devopshelper_bot/badge.svg)](https://snyk.io/test/github/Asgoret/devopshelper_bot) [![CodeFactor](https://www.codefactor.io/repository/github/asgoret/devopshelper_bot/badge)](https://www.codefactor.io/repository/github/asgoret/devopshelper_bot)
