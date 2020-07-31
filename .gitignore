@@ -1,0 +1,6 @@
+__pycache__
+.vscode
+./bot/__pycache__
+dev
+todo.sqlite
+.DS_Store
