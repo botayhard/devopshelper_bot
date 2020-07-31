@@ -50,4 +50,3 @@ class DBHelper:
         args = (user_id, user_username, warn)
         self.conn.execute(stmt, args)
         self.conn.commit()
-

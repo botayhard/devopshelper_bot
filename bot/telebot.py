@@ -78,7 +78,7 @@ def starter(update, context):
         starter = config.get(section, 'starter_filename')
         url = root_url + channel_specify + "/" + starter
         if in_section and feature_flag:
-                if update.message.reply_to_message != None:
+                if update.message.reply_to_message is not None:
                         context.bot.send_message(chat_id=update.message.chat_id,text= "We have " + "[starter kit for newbies]" + "(" + url + ")" + \
                                 ". Also we have test tasks for SRE and list of various courses. You can find them in the same repository or via bot (see man for commands).", \
                                 parse_mode='Markdown', reply_to_message_id=update.message.reply_to_message.message_id)
@@ -235,7 +235,7 @@ def work(update, context):
         coc = config.get('shared', 'jobs_filename')
         url = root_url + coc
         if in_section and feature_flag:
-                if update.message.reply_to_message != None:
+                if update.message.reply_to_message is not None:
                         context.bot.send_message(chat_id=update.message.chat_id,text= "We have " + "[job opportunities and cv publish rules]" + "(" + url + ")" + \
                                 ". Please read them carefully and follow them.", \
                                 parse_mode='Markdown', reply_to_message_id=update.message.reply_to_message.message_id)
