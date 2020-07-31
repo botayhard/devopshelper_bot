@@ -4,11 +4,7 @@ This bot used for helping in administation and moderation DevOps groups in teleg
 
 ## Badges
 
-[![Run Status](https://api.shippable.com/projects/5cafafe8daf54c0007d37f2b/badge?branch=v1.6.1)]()
-
-[![Known Vulnerabilities](https://snyk.io/test/github/Asgoret/devopshelper_bot/badge.svg)](https://snyk.io/test/github/Asgoret/devopshelper_bot)
-
-[![CodeFactor](https://www.codefactor.io/repository/github/asgoret/devopshelper_bot/badge)](https://www.codefactor.io/repository/github/asgoret/devopshelper_bot)
+[![Known Vulnerabilities](https://snyk.io/test/github/Asgoret/devopshelper_bot/badge.svg)](https://snyk.io/test/github/Asgoret/devopshelper_bot) [![CodeFactor](https://www.codefactor.io/repository/github/asgoret/devopshelper_bot/badge)](https://www.codefactor.io/repository/github/asgoret/devopshelper_bot)
 
 ## Realese policy
 
