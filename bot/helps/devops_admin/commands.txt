@@ -1,0 +1,26 @@
+__Admin commands:__
+
+- `/mute 10` - where `10` days (works on replied message)
+- `/warn` - add 1 warn to user. If user gets 3 warns will be banned for 3 days (works on replied message)
+- `/unwarn` - delete 1 warn from user (works on replied message)
+- `/move` - move message from one chat to another (works on replied message)
+- `/job` - forward message to job channel
+
+__User commands:__
+
+- `/man` - send list of commands to chat
+- `/coc` - send code of conduct to user
+- `/jobs` - send rules of publishing job opportunities and cv
+- `/ad` - send rules of publishing advertising
+- `/chats` - send list of friendly chats
+- `/events` - send list of events to user
+- `/tasks` - send user pack of DevOps tasks
+- `/starter` - send starter kit to user
+- `/middle` - send starter kit to user
+- `/course` - send to user list list of courses
+- `/cert` - send user list of certification tips & tricks
+- `/relocate` - send user list of relocate chats and channels
+- `/report` - forward replied message to admin chat and send link of replied message for fast-navigation
+- `/summon` - summon HR to DevOps Jobs chat (works on replied message)
+
+*All commands are disabled in admin chat.*

@@ -1,0 +1,14 @@
+*User commands:*
+- `/man` - send list of commands to chat
+- `/coc` - send code of conduct to user
+- `/jobs` - send rules of publishing job opportunities and cv
+- `/ad` - send rules of publishing advertising
+- `/chats` - send list of friendly chats
+- `/events` - send list of events to user
+- `/starter` - send starter kit to user
+- `/middle` - send middle kit to user
+- `/tasks` - send user pack of DevOps tasks
+- `/course` - send to user list list of courses
+- `/cert` - send user list of certification tips & tricks
+- `/relocate` - send user list of relocate chats and channels
+- `/report` - forward replied message to admin chat and send link of replied message for fast-navigation

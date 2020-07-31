@@ -1,0 +1,42 @@
+# Language setting http://docs.shippable.com/ci/languages/node/
+language: python
+
+# Integrations are used to connect external resources to CI
+# http://docs.shippable.com/integrations/overview/
+integrations:
+  hub:
+    - integrationName: docker_hub
+      type: dockerRegistryLogin
+
+python:
+  - 3.7
+
+
+# using pre-defined build variables
+# full list http://docs.shippable.com/ci/advancedOptions/environmentVariables/
+env:
+  - bottoken=1454355
+build:
+  # http://docs.shippable.com/ci/shippableyml/#ci
+  ci:
+    # http://docs.shippable.com/ci/advancedOptions/retry/
+    # - pip install --upgrade pip
+    # - pip install setuptools --upgrade
+    # - pip install --no-cache-dir -r requirements.txt
+    # - pip install python-telegram-bot --upgrade
+    # - coverage run --branch bot/telebot.py
+    # - coverage xml -o shippable/codecoverage/coverage.xml bot/telebot.py
+    - docker build -t asgoret/devopshelper_bot:$GIT_TAG_NAME .
+  post_ci:
+    - docker push asgoret/devopshelper_bot:$GIT_TAG_NAME
+
+
+  # http://docs.shippable.com/ci/shippableyml/#notifications
+  notifications:
+  # turning of email for PR builds, get notified only on failure and change in status
+  # http://docs.shippable.com/integrations/notifications/email/
+    - integrationName: email
+      type: email
+      on_success: change
+      on_failure: always
+      on_pull_request: never
