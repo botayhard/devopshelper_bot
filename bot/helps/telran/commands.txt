@@ -1,7 +1,6 @@
 *User commands:*
 - `/man` - send list of commands to chat
 - `/coc` - send code of conduct to user
-- `/jobs` - send rules of publishing job opportunities and cv
 - `/starter` - send starter kit to user
 - `/middle` - send middle kit to user
 - `/course` - send to user list list of courses

@@ -131,15 +131,21 @@ def hrman(update, context):
         hrman = config.get('shared', 'hrman_filename')
         url = root_url + hrman
         if in_section and feature_flag:
-                try:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="@" + username + \
-                                " here is your " + "[HR man]" + "(" + url + ")" + "." \
+                if update.message.reply_to_message is not None:
+                        context.bot.send_message(chat_id=update.message.chat_id,text= "We have " + "[HR man]" + "(" + url + ")" + \
+                                ". Please read it carefully.", \
+                                parse_mode='Markdown', reply_to_message_id=update.message.reply_to_message.message_id, disable_web_page_preview=True)
+                        context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
+                else:
+                        try:
+                                context.bot.send_message(chat_id=update.message.chat_id, text="@" + username + \
+                                        " here is your " + "[HR man]" + "(" + url + ")" + "." \
+                                                , parse_mode='Markdown', disable_web_page_preview=True)
+                                context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
+                        except TypeError:
+                                context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[HR man]" + "(" + url + ")" + "." \
                                         , parse_mode='Markdown', disable_web_page_preview=True)
-                        context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
-                except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[HR man]" + "(" + url + ")" + "." \
-                                , parse_mode='Markdown', disable_web_page_preview=True)
-                        context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
+                                context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 hrman_handler = CommandHandler('hrman', hrman, run_async=True)
 dispatcher.add_handler(hrman_handler)
