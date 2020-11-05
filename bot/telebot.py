@@ -43,7 +43,6 @@ def get_admin_ids(context, chat_id):
 
 # User commands
 ## Send user test tasks
-@run_async
 def tasks(update, context):
         section = str(update.message.chat.id)
         username = re.sub("[_]", "\_", update.message.from_user.username)
@@ -62,11 +61,10 @@ def tasks(update, context):
                                 , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
-tasks_handler = CommandHandler('tasks', tasks)
+tasks_handler = CommandHandler('tasks', tasks, run_async=True)
 dispatcher.add_handler(tasks_handler)
 
 ## Send user starter kit
-@run_async
 def starter(update, context):
         section = str(update.message.chat.id)
         username = re.sub("[_]", "\_", update.message.from_user.username)
@@ -94,11 +92,10 @@ def starter(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
-starter_handler = CommandHandler('starter', starter)
+starter_handler = CommandHandler('starter', starter, run_async=True)
 dispatcher.add_handler(starter_handler)
 
 ## Send user middle kit
-@run_async
 def middle(update, context):
         section = str(update.message.chat.id)
         username = re.sub("[_]", "\_", update.message.from_user.username)
@@ -116,12 +113,37 @@ def middle(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[starter kit]" + "(" + url + ")" + "." \
+                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[middle kit]" + "(" + url + ")" + "." \
                                 , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
-middle_handler = CommandHandler('middle', middle)
+middle_handler = CommandHandler('middle', middle, run_async=True)
 dispatcher.add_handler(middle_handler)
+
+## Send user middle kit
+def hrman(update, context):
+        section = str(update.message.chat.id)
+        username = re.sub("[_]", "\_", update.message.from_user.username)
+        in_section = section in config.sections()
+        command_name = inspect.currentframe().f_code.co_name
+        feature_flag = config.get(section, command_name) == 'on'
+        root_url = config.get('shared','root_url')
+        hrman = config.get('shared', 'hrman_filename')
+        url = root_url + hrman
+        if in_section and feature_flag:
+                try:
+                        context.bot.send_message(chat_id=update.message.chat_id, text="@" + username + \
+                                " here is your " + "[HR man]" + "(" + url + ")" + "." \
+                                        , parse_mode='Markdown', disable_web_page_preview=True)
+                        context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
+                except TypeError:
+                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[HR man]" + "(" + url + ")" + "." \
+                                , parse_mode='Markdown', disable_web_page_preview=True)
+                        context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
+
+hrman_handler = CommandHandler('hrman', hrman, run_async=True)
+dispatcher.add_handler(hrman_handler)
+
 
 ## Send user tips for certifications
 def cert(update, context):
@@ -145,7 +167,7 @@ def cert(update, context):
                                 , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
-cert_handler = CommandHandler('cert', cert)
+cert_handler = CommandHandler('cert', cert, run_async=True)
 dispatcher.add_handler(cert_handler)
 
 ## Send user list of various courses
@@ -170,7 +192,7 @@ def course(update, context):
                                 , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
-course_handler = CommandHandler('course', course)
+course_handler = CommandHandler('course', course, run_async=True)
 dispatcher.add_handler(course_handler)
 
 ## Send user list of various relocate chats
@@ -194,11 +216,10 @@ def relocate(update, context):
                                 , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
-relocate_handler = CommandHandler('relocate', relocate)
+relocate_handler = CommandHandler('relocate', relocate, run_async=True)
 dispatcher.add_handler(relocate_handler)
 
 ## Send use Code of Conduct
-@run_async
 def coc(update, context):
         section = str(update.message.chat.id)
         username = re.sub("[_]", "\_", update.message.from_user.username)
@@ -220,11 +241,10 @@ def coc(update, context):
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 
-coc_handler = CommandHandler('coc', coc)
+coc_handler = CommandHandler('coc', coc, run_async=True)
 dispatcher.add_handler(coc_handler)
 
 ## Send user job opportunity and cv publish rules
-@run_async
 def work(update, context):
         section = str(update.message.chat.id)
         username = re.sub("[_]", "\_", update.message.from_user.username)
@@ -238,7 +258,7 @@ def work(update, context):
                 if update.message.reply_to_message is not None:
                         context.bot.send_message(chat_id=update.message.chat_id,text= "We have " + "[job opportunities and cv publish rules]" + "(" + url + ")" + \
                                 ". Please read them carefully and follow them.", \
-                                parse_mode='Markdown', reply_to_message_id=update.message.reply_to_message.message_id)
+                                parse_mode='Markdown', reply_to_message_id=update.message.reply_to_message.message_id, disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 else:
                         try:
@@ -252,11 +272,10 @@ def work(update, context):
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 
-work_handler = CommandHandler('work', work)
+work_handler = CommandHandler('work', work, run_async=True)
 dispatcher.add_handler(work_handler)
 
 ## Send user advertising rules
-@run_async
 def ad(update, context):
         section = str(update.message.chat.id)
         username = re.sub("[_]", "\_", update.message.from_user.username)
@@ -278,11 +297,10 @@ def ad(update, context):
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 
-ad_handler = CommandHandler('ad', ad)
+ad_handler = CommandHandler('ad', ad, run_async=True)
 dispatcher.add_handler(ad_handler)
 
 ## Send user list of friendly chats
-@run_async
 def chats(update, context):
         section = str(update.message.chat.id)
         username = re.sub("[_]", "\_", update.message.from_user.username)
@@ -304,11 +322,10 @@ def chats(update, context):
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 
-chats_handler = CommandHandler('chats', chats)
+chats_handler = CommandHandler('chats', chats, run_async=True)
 dispatcher.add_handler(chats_handler)
 
 ## Send user events rules
-@run_async
 def events(update, context):
         section = str(update.message.chat.id)
         username = re.sub("[_]", "\_", update.message.from_user.username)
@@ -330,11 +347,10 @@ def events(update, context):
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 
-events_handler = CommandHandler('events', events)
+events_handler = CommandHandler('events', events, run_async=True)
 dispatcher.add_handler(events_handler)
 
 ## User send report message to admins
-@run_async
 def report(update, context):
         section = str(update.message.chat.id)
         in_section = section in config.sections()
@@ -344,21 +360,19 @@ def report(update, context):
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="Report on [spam message]("+ "https://t.me/" + str(update.message.chat.username) + "/" \
                                 + str(update.message.reply_to_message.message_id) + ")" + " was send to admins. Please be patient.", \
-                                message_id=update.message.message_id, disable_web_page_preview=True, parse_mode='Markdown')
+                                disable_web_page_preview=True, parse_mode='Markdown')
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                         context.bot.forward_message(chat_id=config.get(section, 'admin_chat'), from_chat_id=update.message.chat_id, message_id=update.message.reply_to_message.message_id)
                         context.bot.send_message(chat_id=config.get(section, 'admin_chat'), text="User think it's spam: " + "https://t.me/"+ str(update.message.chat.username)+"/" \
                                 + str(update.message.reply_to_message.message_id), disable_web_page_preview=True)
                 except AttributeError:
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
-                        context.bot.send_message(chat_id=update.message.chat_id, text="This command works on replied messages only.", \
-                                message_id=update.message.message_id)
+                        context.bot.send_message(chat_id=update.message.chat_id, text="Report command works on replied messages only.")
 
 report_handler = CommandHandler('report', report)
 dispatcher.add_handler(report_handler)
 
 ## User summon some HRs in thread
-@run_async
 def summon(update, context):
         section = str(update.message.chat.id)
         in_section = section in config.sections()
@@ -372,14 +386,12 @@ def summon(update, context):
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except AttributeError:
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
-                        context.bot.send_message(chat_id=update.message.chat_id, text="This command works on replied messages only.", \
-                                message_id=update.message.message_id)
+                        context.bot.send_message(chat_id=update.message.chat_id, text="Summon command works on replied messages only.")
 
-summon_handler = CommandHandler('summon', summon)
+summon_handler = CommandHandler('summon', summon, run_async=True)
 dispatcher.add_handler(summon_handler)
 
 ## Send user bots man
-@run_async
 def man(update, context):
         section = str(update.message.chat.id)
         username = re.sub("[_]", "\_", update.message.from_user.username)
@@ -398,13 +410,12 @@ def man(update, context):
                                 disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
-man_handler = CommandHandler('man', man)
+man_handler = CommandHandler('man', man, run_async=True)
 dispatcher.add_handler(man_handler)
 
 # Administrator commands
 
 ## Mute some user
-@run_async
 def mute(update, context):
         section = str(update.message.chat.id)
         in_section = section in config.sections()
@@ -435,11 +446,10 @@ def mute(update, context):
                                 reply_to_message_id=update.message.message_id)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
-mute_handler = CommandHandler('mute', mute, pass_args=True)
+mute_handler = CommandHandler('mute', mute, pass_args=True, run_async=True)
 dispatcher.add_handler(mute_handler)
 
 ## Warn some user
-@run_async
 def warn(update, context, args):
         user_id = update.message.reply_to_message.from_user.id
         user_username = update.message.reply_to_message.from_user.username
@@ -465,11 +475,10 @@ def warn(update, context, args):
                         can_send_messages=False, can_send_media_messages=False, can_send_other_messages=False, \
                         can_add_web_page_previews=False, until_date=datetime.datetime.now() + datetime.timedelta(days=3))
 
-warn_handler = CommandHandler('warn', warn, pass_args=True)
+warn_handler = CommandHandler('warn', warn, pass_args=True, run_async=True)
 dispatcher.add_handler(warn_handler)
 
 ## Unwarn user
-@run_async
 def unwarn(update, context):
         user_id = update.message.reply_to_message.from_user.id
         user_username = update.message.reply_to_message.from_user.username
@@ -487,11 +496,10 @@ def unwarn(update, context):
                          reply_to_message_id=update.message.message_id)
                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
-unwarn_handler = CommandHandler('unwarn', unwarn)
+unwarn_handler = CommandHandler('unwarn', unwarn, run_async=True)
 dispatcher.add_handler(unwarn_handler)
 
 ## Move message from one chat to another
-@run_async
 def move(update, context):
         section = str(update.message.chat.id)
         in_section = section in config.sections()
@@ -531,11 +539,10 @@ def move(update, context):
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.reply_to_message.message_id)
 
 
-move_handler = CommandHandler('move', move)
+move_handler = CommandHandler('move', move, run_async=True)
 dispatcher.add_handler(move_handler)
 
 ## Post job opportunity into channel
-@run_async
 def job(update, context):
         section = str(update.message.chat.id)
         in_section = section in config.sections()
@@ -549,22 +556,20 @@ def job(update, context):
                         text="Your post was posted in " + config.get(section, 'post_to_name'))
                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
-job_handler = CommandHandler('job', job)
+job_handler = CommandHandler('job', job, run_async=True)
 dispatcher.add_handler(job_handler)
 
 ## Get chat number
-@run_async
 def idnumber(update, context):
         admins = update.message.from_user.id in get_admin_ids(context, update.message.chat_id) 
         if admins:
                 context.bot.send_message(chat_id=update.message.chat_id, text=update.message.chat_id)
                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
-idnumber_handler = CommandHandler('idnumber', idnumber)
+idnumber_handler = CommandHandler('idnumber', idnumber, run_async=True)
 dispatcher.add_handler(idnumber_handler)
 
 ## Delete service messages
-@run_async
 def delete_service_message(update, context):
         section = str(update.message.chat.id)
         in_section = section in config.sections()
@@ -574,8 +579,8 @@ def delete_service_message(update, context):
         if in_section and feature_flag:
                 context.bot.delete_message(chat_id=msg.chat.id,message_id=msg.message_id)
 
-dispatcher.add_handler(MessageHandler(Filters.status_update.new_chat_members, delete_service_message))
-dispatcher.add_handler(MessageHandler(Filters.status_update.left_chat_member, delete_service_message))
+dispatcher.add_handler(MessageHandler(Filters.status_update.new_chat_members, delete_service_message, run_async=True))
+dispatcher.add_handler(MessageHandler(Filters.status_update.left_chat_member, delete_service_message, run_async=True))
 
 
 def main():
