@@ -51,7 +51,10 @@ def tasks(update, context):
         feature_flag = config.get(section, command_name) == 'on'
         github_url = config.get(section, 'github_url')
         user_id = update.message.from_user.id
-        first_name = update.message.from_user.first_name
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -79,7 +82,10 @@ def starter(update, context):
         starter = config.get(section, 'starter_filename')
         url = root_url + channel_specify + "/" + starter
         user_id = update.message.from_user.id
-        first_name = update.message.from_user.first_name
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 if update.message.reply_to_message is not None:
                         context.bot.send_message(chat_id=update.message.chat_id,text= "We have " + "[starter kit for newbies]" + "(" + url + ")" + \
@@ -113,7 +119,10 @@ def middle(update, context):
         middle = config.get(section, 'middle_filename')
         url = root_url + channel_specify + "/" + middle
         user_id = update.message.from_user.id
-        first_name = update.message.from_user.first_name
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" + username + \
@@ -140,7 +149,10 @@ def hrman(update, context):
         hrman = config.get('shared', 'hrman_filename')
         url = root_url + hrman
         user_id = update.message.from_user.id
-        first_name = update.message.from_user.first_name
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 if update.message.reply_to_message is not None:
                         context.bot.send_message(chat_id=update.message.chat_id,text= "We have " + "[HR man]" + "(" + url + ")" + \
@@ -175,7 +187,10 @@ def cert(update, context):
         certification = config.get(section, 'certification_filename')
         url = root_url + channel_specify + "/" + certification
         user_id = update.message.from_user.id
-        first_name = update.message.from_user.first_name
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -203,7 +218,10 @@ def course(update, context):
         certification = config.get('shared', 'course_filename')
         url = root_url + channel_specify + "/" + certification
         user_id = update.message.from_user.id
-        first_name = update.message.from_user.first_name
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" + username + \
@@ -230,7 +248,7 @@ def relocate(update, context):
         relocate = config.get('shared', 'relocate_filename')
         url = root_url + relocate
         user_id = update.message.from_user.id
-        first_name = update.message.from_user.first_name
+        first_name = re.sub("[_]", "_", update.message.from_user.first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -257,7 +275,10 @@ def coc(update, context):
         coc = config.get('shared', 'coc_filename')
         url = root_url + coc
         user_id = update.message.from_user.id
-        first_name = update.message.from_user.first_name
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -285,7 +306,10 @@ def work(update, context):
         coc = config.get('shared', 'jobs_filename')
         url = root_url + coc
         user_id = update.message.from_user.id
-        first_name = update.message.from_user.first_name
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 if update.message.reply_to_message is not None:
                         context.bot.send_message(chat_id=update.message.chat_id,text= "We have " + "[job opportunities and cv publish rules]" + "(" + url + ")" + \
@@ -319,7 +343,10 @@ def ad(update, context):
         coc = config.get('shared', 'advertising_filename')
         url = root_url + coc
         user_id = update.message.from_user.id
-        first_name = update.message.from_user.first_name
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -347,7 +374,10 @@ def chats(update, context):
         coc = config.get('shared', 'othet_chats')
         url = root_url + coc
         user_id = update.message.from_user.id
-        first_name = update.message.from_user.first_name
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -375,7 +405,10 @@ def events(update, context):
         coc = config.get('shared', 'events_list')
         url = root_url + coc
         user_id = update.message.from_user.id
-        first_name = update.message.from_user.first_name
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
