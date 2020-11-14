@@ -50,6 +50,11 @@ def tasks(update, context):
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
         github_url = config.get(section, 'github_url')
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -57,8 +62,9 @@ def tasks(update, context):
                                         ,parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[DevOps tasks]" + "(" + github_url + ")" + "." \
-                                , parse_mode='Markdown', disable_web_page_preview=True)
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                " here is your " + "[DevOps tasks]" + "(" + github_url + ")" + "." \
+                                        , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 tasks_handler = CommandHandler('tasks', tasks, run_async=True)
@@ -75,6 +81,11 @@ def starter(update, context):
         channel_specify = config.get(section, 'study')
         starter = config.get(section, 'starter_filename')
         url = root_url + channel_specify + "/" + starter
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 if update.message.reply_to_message is not None:
                         context.bot.send_message(chat_id=update.message.chat_id,text= "We have " + "[starter kit for newbies]" + "(" + url + ")" + \
@@ -88,8 +99,9 @@ def starter(update, context):
                                                 ,parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                         except TypeError:
-                                context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[starter kit]" + "(" + url + ")" + "." \
-                                        , parse_mode='Markdown', disable_web_page_preview=True)
+                                context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                        " here is your " + "[starter kit]" + "(" + url + ")" + "." \
+                                                , parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 starter_handler = CommandHandler('starter', starter, run_async=True)
@@ -106,6 +118,11 @@ def middle(update, context):
         channel_specify = config.get(section, 'study')
         middle = config.get(section, 'middle_filename')
         url = root_url + channel_specify + "/" + middle
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" + username + \
@@ -113,8 +130,9 @@ def middle(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[middle kit]" + "(" + url + ")" + "." \
-                                , parse_mode='Markdown', disable_web_page_preview=True)
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                " here is your " + "[middle kit]" + "(" + url + ")" + "." \
+                                        , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 middle_handler = CommandHandler('middle', middle, run_async=True)
@@ -130,6 +148,11 @@ def hrman(update, context):
         root_url = config.get('shared','root_url')
         hrman = config.get('shared', 'hrman_filename')
         url = root_url + hrman
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 if update.message.reply_to_message is not None:
                         context.bot.send_message(chat_id=update.message.chat_id,text= "We have " + "[HR man]" + "(" + url + ")" + \
@@ -143,8 +166,9 @@ def hrman(update, context):
                                                 , parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                         except TypeError:
-                                context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[HR man]" + "(" + url + ")" + "." \
-                                        , parse_mode='Markdown', disable_web_page_preview=True)
+                                context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                        " here is your " + "[HR man]" + "(" + url + ")" + "." \
+                                                , parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 hrman_handler = CommandHandler('hrman', hrman, run_async=True)
@@ -162,6 +186,11 @@ def cert(update, context):
         channel_specify = config.get(section, 'study')
         certification = config.get(section, 'certification_filename')
         url = root_url + channel_specify + "/" + certification
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -169,8 +198,9 @@ def cert(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[certification tips]" + "(" + url + ")" + "." \
-                                , parse_mode='Markdown', disable_web_page_preview=True)
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                " here is your " + "[certification tips]" + "(" + url + ")" + "." \
+                                        , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 cert_handler = CommandHandler('cert', cert, run_async=True)
@@ -187,15 +217,21 @@ def course(update, context):
         channel_specify = config.get('shared', 'course_folder')
         certification = config.get('shared', 'course_filename')
         url = root_url + channel_specify + "/" + certification
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" + username + \
                                " here is your " + "[courses list]" + "(" + url + ")" + "." \
-                                       , parse_mode='Markdown', disable_web_page_preview=True)
+                                        , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[courses list]" + "(" + url + ")" + "." \
-                                , parse_mode='Markdown', disable_web_page_preview=True)
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                " here is your " + "[courses list]" + "(" + url + ")" + "." \
+                                        , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 course_handler = CommandHandler('course', course, run_async=True)
@@ -211,6 +247,8 @@ def relocate(update, context):
         root_url = config.get('shared','root_url')
         relocate = config.get('shared', 'relocate_filename')
         url = root_url + relocate
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "_", update.message.from_user.first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -218,8 +256,9 @@ def relocate(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[relocate chats and channels]" + "(" + url + ")" + "." \
-                                , parse_mode='Markdown', disable_web_page_preview=True)
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                " here is your " + "[relocate chats and channels]" + "(" + url + ")" + "." \
+                                        , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 relocate_handler = CommandHandler('relocate', relocate, run_async=True)
@@ -235,6 +274,11 @@ def coc(update, context):
         root_url = config.get('shared','root_url')
         coc = config.get('shared', 'coc_filename')
         url = root_url + coc
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -242,8 +286,9 @@ def coc(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[code of conduct]" + "(" + url + ")" + "." \
-                                , parse_mode='Markdown', disable_web_page_preview=True)
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                " here is your " + "[code of conduct]" + "(" + url + ")" + "." \
+                                        , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 
@@ -260,6 +305,11 @@ def work(update, context):
         root_url = config.get('shared','root_url')
         coc = config.get('shared', 'jobs_filename')
         url = root_url + coc
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 if update.message.reply_to_message is not None:
                         context.bot.send_message(chat_id=update.message.chat_id,text= "We have " + "[job opportunities and cv publish rules]" + "(" + url + ")" + \
@@ -273,8 +323,9 @@ def work(update, context):
                                                 , parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                         except TypeError:
-                                context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[job opportunities and cv publish rules]" \
-                                        + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
+                                context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                        " here is your " + "[job opportunities and cv publish rules]" \
+                                                + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 
@@ -291,6 +342,11 @@ def ad(update, context):
         root_url = config.get('shared','root_url')
         coc = config.get('shared', 'advertising_filename')
         url = root_url + coc
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -298,8 +354,9 @@ def ad(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[advertising publish rules]" \
-                                + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                " here is your " + "[advertising publish rules]" \
+                                        + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 
@@ -316,6 +373,11 @@ def chats(update, context):
         root_url = config.get('shared','root_url')
         coc = config.get('shared', 'othet_chats')
         url = root_url + coc
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -323,8 +385,9 @@ def chats(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[friendly chats list]" \
-                                + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                " here is your " + "[friendly chats list]" \
+                                        + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 
@@ -341,6 +404,11 @@ def events(update, context):
         root_url = config.get('shared','root_url')
         coc = config.get('shared', 'events_list')
         url = root_url + coc
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -348,8 +416,9 @@ def events(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="Here is your " + "[events list]" \
-                                + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
+                        context.bot.send_message(chat_id=update.message.chat_id, text=
+                                " here is your " + "[events list]" \
+                                        + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 
@@ -431,7 +500,7 @@ def mute(update, context):
         date = int()
         restrict = ChatPermissions(can_send_messages=False, can_send_media_messages=False, can_send_other_messages=False, can_add_web_page_previews=False)
         if in_section and feature_flag and admins:
-                try: 
+                try:
                         if len(sys.argv) < 1:
                                 date = int(' '.join(context.args))
                         else:
@@ -465,7 +534,7 @@ def warn(update, context, args):
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
-        admins = update.message.from_user.id in get_admin_ids(context, update.message.chat_id) 
+        admins = update.message.from_user.id in get_admin_ids(context, update.message.chat_id)
         if in_section and feature_flag and admins:
                 db.add_user(user_id, user_username, warn)
                 db.add_warn(user_id, user_username, warn)
@@ -493,7 +562,7 @@ def unwarn(update, context):
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
-        admins = update.message.from_user.id in get_admin_ids(context, update.message.chat_id) 
+        admins = update.message.from_user.id in get_admin_ids(context, update.message.chat_id)
         if in_section and feature_flag and admins:
                 db.unwarn(user_id, user_username, warn)
                 warn_text = db.count_warn(user_id)
@@ -554,7 +623,7 @@ def job(update, context):
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
-        admins = update.message.from_user.id in get_admin_ids(context, update.message.chat_id) 
+        admins = update.message.from_user.id in get_admin_ids(context, update.message.chat_id)
         if in_section and feature_flag and admins:
                 context.bot.forward_message(chat_id=config.get(section, 'post_to_name'), from_chat_id=update.message.chat_id, \
                         message_id=update.message.reply_to_message.message_id,  disable_notification=False)
@@ -567,7 +636,7 @@ dispatcher.add_handler(job_handler)
 
 ## Get chat number
 def idnumber(update, context):
-        admins = update.message.from_user.id in get_admin_ids(context, update.message.chat_id) 
+        admins = update.message.from_user.id in get_admin_ids(context, update.message.chat_id)
         if admins:
                 context.bot.send_message(chat_id=update.message.chat_id, text=update.message.chat_id)
                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
