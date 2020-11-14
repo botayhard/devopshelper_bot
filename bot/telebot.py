@@ -249,6 +249,9 @@ def relocate(update, context):
         url = root_url + relocate
         user_id = update.message.from_user.id
         first_name = re.sub("[_]", "_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         context.bot.send_message(chat_id=update.message.chat_id, text="@" +  username + \
@@ -416,7 +419,7 @@ def events(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text=
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
                                 " here is your " + "[events list]" \
                                         + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -473,6 +476,11 @@ def man(update, context):
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
         if in_section and feature_flag:
                 try:
                         f = open("helps/" + config.get(section, 'commands_list') + "/commands.txt", "r")
@@ -481,8 +489,8 @@ def man(update, context):
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
                         f = open("helps/" + config.get(section, 'commands_list') + "/commands.txt", "r")
-                        context.bot.send_message(chat_id=update.message.chat_id, text=f.read(), parse_mode='Markdown', \
-                                disable_web_page_preview=True)
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                        + "\n" + f.read(), parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 man_handler = CommandHandler('man', man, run_async=True)
