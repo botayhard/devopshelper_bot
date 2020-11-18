@@ -510,18 +510,18 @@ def mute(update, context):
         first_name = re.sub("[*]", "\*", first_name)
         first_name = re.sub("[`]", "\`", first_name)
         first_name = re.sub("[[]", "\[", first_name)
-        message_text=update.message.text
+        message_text=update.message.text+" "
         hour=int()
-        if len(re.findall(" [0-9]{1,3}h", message_text)):
-                temp = re.findall(" [0-9]{1,2}h", message_text)
+        if len(re.findall(" [0-9]{1,3}h ", message_text)):
+                temp = re.findall(" [0-9]{1,2}h ", message_text)
                 hour = int(re.sub("h", "", temp[0]))
         day=int()
-        if len(re.findall(" [0-9]{1,3}d", message_text)):
-                temp = re.findall(" [0-9]{1,2}d", message_text)
+        if len(re.findall(" [0-9]{1,3}d ", message_text)):
+                temp = re.findall(" [0-9]{1,2}d ", message_text)
                 day = int(re.sub("d", "", temp[0]))
         week=int()
         if len(re.findall(" [0-9]{1,3}w ", message_text)):
-                temp = re.findall(" [0-9]{1,2}w", message_text)
+                temp = re.findall(" [0-9]{1,2}w ", message_text)
                 week = int(re.sub("w", "", temp[0]))
         if len(re.findall(" inf", message_text)):
                 day=367
