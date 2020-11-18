@@ -535,7 +535,7 @@ def mute(update, context):
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
                         context.bot.restrict_chat_member(chat_id=update.message.chat_id, user_id=update.message.reply_to_message.from_user.id, \
-                                until_date=datetime.datetime.now() + datetime.timedelta(days=date), permissions = restrict)
+                                until_date=datetime.datetime.now() + datetime.timedelta(days=day, hours=hour, weeks=week), permissions = restrict)
                         context.bot.send_message(chat_id=update.message.chat_id, text="User " + "[" + first_name + "](tg://user?id=" + user_id + ")" + " muted", \
                                 reply_to_message_id=update.message.message_id, parse_mode='Markdown')
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
