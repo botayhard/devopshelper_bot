@@ -45,7 +45,10 @@ def get_admin_ids(context, chat_id):
 ## Send user test tasks
 def tasks(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
@@ -73,7 +76,10 @@ dispatcher.add_handler(tasks_handler)
 ## Send user starter kit
 def starter(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
@@ -110,7 +116,10 @@ dispatcher.add_handler(starter_handler)
 ## Send user middle kit
 def middle(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
@@ -141,7 +150,10 @@ dispatcher.add_handler(middle_handler)
 ## Send user middle kit
 def hrman(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
@@ -178,7 +190,10 @@ dispatcher.add_handler(hrman_handler)
 ## Send user tips for certifications
 def cert(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
@@ -209,7 +224,10 @@ dispatcher.add_handler(cert_handler)
 ## Send user list of various courses
 def course(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
@@ -240,7 +258,10 @@ dispatcher.add_handler(course_handler)
 ## Send user list of various relocate chats
 def relocate(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
@@ -270,7 +291,10 @@ dispatcher.add_handler(relocate_handler)
 ## Send use Code of Conduct
 def coc(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
@@ -301,7 +325,10 @@ dispatcher.add_handler(coc_handler)
 ## Send user job opportunity and cv publish rules
 def work(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
@@ -338,7 +365,10 @@ dispatcher.add_handler(work_handler)
 ## Send user advertising rules
 def ad(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
@@ -369,7 +399,10 @@ dispatcher.add_handler(ad_handler)
 ## Send user list of friendly chats
 def chats(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
@@ -400,7 +433,10 @@ dispatcher.add_handler(chats_handler)
 ## Send user events rules
 def events(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
@@ -472,7 +508,10 @@ dispatcher.add_handler(summon_handler)
 ## Send user bots man
 def man(update, context):
         section = str(update.message.chat.id)
-        username = re.sub("[_]", "\_", update.message.from_user.username)
+        try:
+                username = re.sub("[_]", "\_", update.message.from_user.username)
+        except TypeError:
+                username = None
         in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
