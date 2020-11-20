@@ -65,7 +65,7 @@ def tasks(update, context):
                                         ,parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                                 " here is your " + "[DevOps tasks]" + "(" + github_url + ")" + "." \
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -105,7 +105,7 @@ def starter(update, context):
                                                 ,parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                         except TypeError:
-                                context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                                         " here is your " + "[starter kit]" + "(" + url + ")" + "." \
                                                 , parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -139,7 +139,7 @@ def middle(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                                 " here is your " + "[middle kit]" + "(" + url + ")" + "." \
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -178,7 +178,7 @@ def hrman(update, context):
                                                 , parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                         except TypeError:
-                                context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                                         " here is your " + "[HR man]" + "(" + url + ")" + "." \
                                                 , parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -213,7 +213,7 @@ def cert(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                                 " here is your " + "[certification tips]" + "(" + url + ")" + "." \
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -247,7 +247,7 @@ def course(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                                 " here is your " + "[courses list]" + "(" + url + ")" + "." \
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -280,7 +280,7 @@ def relocate(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                                 " here is your " + "[relocate chats and channels]" + "(" + url + ")" + "." \
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -313,7 +313,7 @@ def coc(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                                 " here is your " + "[code of conduct]" + "(" + url + ")" + "." \
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -353,7 +353,7 @@ def work(update, context):
                                                 , parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                         except TypeError:
-                                context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                                context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                                         " here is your " + "[job opportunities and cv publish rules]" \
                                                 + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
                                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -387,7 +387,7 @@ def ad(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                                 " here is your " + "[advertising publish rules]" \
                                         + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -421,7 +421,7 @@ def chats(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                                 " here is your " + "[friendly chats list]" \
                                         + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -455,7 +455,7 @@ def events(update, context):
                                         , parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
-                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                                 " here is your " + "[events list]" \
                                         + "(" + url + ")" + ".", parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
@@ -528,7 +528,7 @@ def man(update, context):
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
                         f = open("helps/" + config.get(section, 'commands_list') + "/commands.txt", "r")
-                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
+                        context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + str(user_id) + ")" + \
                         + "\n" + f.read(), parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
