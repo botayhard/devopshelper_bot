@@ -505,11 +505,16 @@ def mute(update, context):
         command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
         admins = update.message.from_user.id in get_admin_ids(context, update.message.chat_id)
+        admin_chat = config.get(section, 'admin_chat')
         user_id = update.message.reply_to_message.from_user.id
         first_name = re.sub("[_]", "\_", update.message.reply_to_message.from_user.first_name)
         first_name = re.sub("[*]", "\*", first_name)
         first_name = re.sub("[`]", "\`", first_name)
         first_name = re.sub("[[]", "\[", first_name)
+        last_name = re.sub("[_]", "\_", update.message.reply_to_message.from_user.last_name)
+        last_name = re.sub("[*]", "\*", last_name)
+        last_name = re.sub("[`]", "\`", last_name)
+        last_name = re.sub("[[]", "\[", last_name)
         message_text=update.message.text+" "
         hour=int()
         if len(re.findall(" [0-9]{1,3}h ", message_text)):
@@ -519,24 +524,53 @@ def mute(update, context):
         if len(re.findall(" [0-9]{1,3}d ", message_text)):
                 temp = re.findall(" [0-9]{1,2}d ", message_text)
                 day = int(re.sub("d", "", temp[0]))
-        week=int()
         if len(re.findall(" [0-9]{1,3}w ", message_text)):
                 temp = re.findall(" [0-9]{1,2}w ", message_text)
-                week = int(re.sub("w", "", temp[0]))
-        if len(re.findall(" inf", message_text)):
-                day=367
+                day = day + int(re.sub("w", "", temp[0])) * 7
+        if len(re.findall(" inf ", message_text)):
+                day = 367
+        if hour>0:
+                if hour==1:
+                        duration = str(hour) + "hour"
+                else:
+                        duration = str(hour) + "hours"
+        if day>0:
+                if hour>0: duration = duration + " "
+                if day==1:
+                        duration = str(day) + "day"
+                else:
+                        duration = str(day) + "days"
+        if hour==0 and day==0 or day>366:
+                duration = "forever"
+        comment = message_text.replace("/mute ", "")
+        if len(re.findall(" [0-9]{1,3}h ", message_text)):
+                comment = re.sub("[0-9]{1,3}h ", "", comment)
+        if len(re.findall(" [0-9]{1,3}d ", message_text)):
+                comment = re.sub("[0-9]{1,3}d ", "", comment)
+        if len(re.findall(" [0-9]{1,3}w ", message_text)):
+                comment = re.sub("[0-9]{1,3}w ", "", comment)
+        if len(re.findall(" inf ", message_text)):
+                comment = re.sub("inf ", "", comment)
+        if len(re.findall("[a-zA-Z0-9]", comment))==0:
+                comment = "not found"
         restrict = ChatPermissions(can_send_messages=False, can_send_media_messages=False, can_send_other_messages=False, can_add_web_page_previews=False)
         if in_section and feature_flag and admins:
                 try:
                         context.bot.restrict_chat_member(chat_id=update.message.chat_id, user_id=update.message.reply_to_message.from_user.id, \
-                                until_date=datetime.datetime.now() + datetime.timedelta(days=day, hours=hour, weeks=week), permissions = restrict)
+                                until_date=datetime.datetime.now() + datetime.timedelta(days=day, hours=hour), permissions = restrict)
+                        context.bot.send_message(chat_id=admin_chat, text="User " + "[" + first_name + " " + last_name + "](tg://user?id=" + str(user_id) + ") " \
+                                + "(@" + update.message.reply_to_message.from_user.username + ") was muted by [admin](tg://user?id=" + str(update.message.from_user.id) + ") " \
+                                + "in chat " + update.message.chat.title + "\nDuration: " + duration + "\nComment: " + comment, parse_mode='Markdown')
                         context.bot.send_message(chat_id=update.message.chat_id, text="User " + "@" + str(update.message.reply_to_message.from_user.username) + " muted.", \
                                 reply_to_message_id=update.message.message_id)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
                 except TypeError:
                         context.bot.restrict_chat_member(chat_id=update.message.chat_id, user_id=update.message.reply_to_message.from_user.id, \
-                                until_date=datetime.datetime.now() + datetime.timedelta(days=day, hours=hour, weeks=week), permissions = restrict)
-                        context.bot.send_message(chat_id=update.message.chat_id, text="User " + "[" + first_name + "](tg://user?id=" + user_id + ")" + " muted", \
+                                until_date=datetime.datetime.now() + datetime.timedelta(days=day, hours=hour), permissions = restrict)
+                        context.bot.send_message(chat_id=admin_chat, text="User " + "[" + first_name + " " + last_name + "](tg://user?id=" + str(user_id) + ") " \
+                                + "was muted by [admin](tg://user?id=" + str(update.message.from_user.id) + ") " + "in chat " + update.message.chat.title \
+                                + "\nDuration: " + duration + "\nComment: " + comment, parse_mode='Markdown')
+                        context.bot.send_message(chat_id=update.message.chat_id, text="User " + "[" + first_name + "](tg://user?id=" + str(user_id) + ")" + " muted", \
                                 reply_to_message_id=update.message.message_id, parse_mode='Markdown')
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
