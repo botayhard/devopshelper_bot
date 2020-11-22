@@ -516,7 +516,9 @@ def mute(update, context):
         last_name = re.sub("[`]", "\`", last_name)
         last_name = re.sub("[[]", "\[", last_name)
         message_text=update.message.text+" "
-        hour,day,duration,comment = mute_parse(message_text)
+        hour,day = mute_parse_date(message_text)
+        duration = mute_gen_duration_message(hour, day)
+        comment = mute_parse_comment_message(message_text)
         restrict = ChatPermissions(can_send_messages=False, can_send_media_messages=False, can_send_other_messages=False, can_add_web_page_previews=False)
         if in_section and feature_flag and admins:
                 try:
@@ -542,7 +544,7 @@ mute_handler = CommandHandler('mute', mute, pass_args=True, run_async=True)
 dispatcher.add_handler(mute_handler)
 
 ##mute support func
-def mute_parse(message_text):
+def mute_parse_date(message_text):
         hour=int()
         if len(re.findall(" [0-9]{1,3}h ", message_text)):
                 temp = re.findall(" [0-9]{1,2}h ", message_text)
@@ -556,19 +558,26 @@ def mute_parse(message_text):
                 day = day + int(re.sub("w", "", temp[0])) * 7
         if len(re.findall(" inf ", message_text)):
                 day = 367
+        return hour, day
+
+def mute_gen_duration_message(hour, day):
+        duration=str()
         if hour>0:
                 if hour==1:
-                        duration = str(hour) + "hour"
+                        duration = str(hour) + " hour"
                 else:
-                        duration = str(hour) + "hours"
+                        duration = str(hour) + " hours"
         if day>0:
                 if hour>0: duration = duration + " "
                 if day==1:
-                        duration = str(day) + "day"
+                        duration = duration + str(day) + " day"
                 else:
-                        duration = str(day) + "days"
+                        duration = duration + str(day) + " days"
         if hour==0 and day==0 or day>366:
                 duration = "forever"
+        return duration
+
+def mute_parse_comment_message(message_text):
         comment = message_text.replace("/mute ", "")
         if len(re.findall(" [0-9]{1,3}h ", message_text)):
                 comment = re.sub("[0-9]{1,3}h ", "", comment)
@@ -580,7 +589,7 @@ def mute_parse(message_text):
                 comment = re.sub("inf ", "", comment)
         if len(re.findall("[a-zA-Z0-9]", comment))==0:
                 comment = "not found"
-        return hour, day, duration, comment
+        return comment
 
 
 ## Warn some user
