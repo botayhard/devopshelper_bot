@@ -557,10 +557,14 @@ def mute(update, context):
         first_name = re.sub("[*]", "\*", first_name)
         first_name = re.sub("[`]", "\`", first_name)
         first_name = re.sub("[[]", "\[", first_name)
-        last_name = re.sub("[_]", "\_", update.message.reply_to_message.from_user.last_name)
-        last_name = re.sub("[*]", "\*", last_name)
-        last_name = re.sub("[`]", "\`", last_name)
-        last_name = re.sub("[[]", "\[", last_name)
+        try:
+                last_name = re.sub("[_]", "\_", update.message.reply_to_message.from_user.last_name)
+                last_name = re.sub("[*]", "\*", last_name)
+                last_name = re.sub("[`]", "\`", last_name)
+                last_name = re.sub("[[]", "\[", last_name)
+                full_name = first_name + " " last_name
+        except TypeError:
+                full_name = first_name
         message_text=update.message.text+" "
         hour,day = mute_parse_date(message_text)
         duration = mute_gen_duration_message(hour, day)
@@ -570,7 +574,7 @@ def mute(update, context):
                 try:
                         context.bot.restrict_chat_member(chat_id=update.message.chat_id, user_id=update.message.reply_to_message.from_user.id, \
                                 until_date=datetime.datetime.now() + datetime.timedelta(days=day, hours=hour), permissions = restrict)
-                        context.bot.send_message(chat_id=admin_chat, text="User " + "[" + first_name + " " + last_name + "](tg://user?id=" + str(user_id) + ") " \
+                        context.bot.send_message(chat_id=admin_chat, text="User " + "[" + full_name + "](tg://user?id=" + str(user_id) + ") " \
                                 + "(@" + update.message.reply_to_message.from_user.username + ") was muted by [admin](tg://user?id=" + str(update.message.from_user.id) + ") " \
                                 + "in chat " + update.message.chat.title + "\nDuration: " + duration + "\nComment: " + comment, parse_mode='Markdown')
                         context.bot.send_message(chat_id=update.message.chat_id, text="User " + "@" + str(update.message.reply_to_message.from_user.username) + " muted.", \
@@ -579,7 +583,7 @@ def mute(update, context):
                 except TypeError:
                         context.bot.restrict_chat_member(chat_id=update.message.chat_id, user_id=update.message.reply_to_message.from_user.id, \
                                 until_date=datetime.datetime.now() + datetime.timedelta(days=day, hours=hour), permissions = restrict)
-                        context.bot.send_message(chat_id=admin_chat, text="User " + "[" + first_name + " " + last_name + "](tg://user?id=" + str(user_id) + ") " \
+                        context.bot.send_message(chat_id=admin_chat, text="User " + "[" + full_name + "](tg://user?id=" + str(user_id) + ") " \
                                 + "was muted by [admin](tg://user?id=" + str(update.message.from_user.id) + ") " + "in chat " + update.message.chat.title \
                                 + "\nDuration: " + duration + "\nComment: " + comment, parse_mode='Markdown')
                         context.bot.send_message(chat_id=update.message.chat_id, text="User " + "[" + first_name + "](tg://user?id=" + str(user_id) + ")" + " muted", \
