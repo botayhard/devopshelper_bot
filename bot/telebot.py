@@ -562,7 +562,7 @@ def mute(update, context):
                 last_name = re.sub("[*]", "\*", last_name)
                 last_name = re.sub("[`]", "\`", last_name)
                 last_name = re.sub("[[]", "\[", last_name)
-                full_name = first_name + " " last_name
+                full_name = first_name + " " + last_name
         except TypeError:
                 full_name = first_name
         message_text=update.message.text+" "
