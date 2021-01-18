@@ -550,17 +550,17 @@ dispatcher.add_handler(mute_handler)
 ##mute support func
 def mute_parse_date(message_text):
         hour=int()
-        if len(re.findall(" [0-9]{1,3}h ", message_text)):
+        if any(re.findall(" [0-9]{1,3}h ", message_text)):
                 temp = re.findall(" [0-9]{1,2}h ", message_text)
                 hour = int(re.sub("h", "", temp[0]))
         day=int()
-        if len(re.findall(" [0-9]{1,3}d ", message_text)):
+        if any(re.findall(" [0-9]{1,3}d ", message_text)):
                 temp = re.findall(" [0-9]{1,2}d ", message_text)
                 day = int(re.sub("d", "", temp[0]))
-        if len(re.findall(" [0-9]{1,3}w ", message_text)):
+        if any(re.findall(" [0-9]{1,3}w ", message_text)):
                 temp = re.findall(" [0-9]{1,2}w ", message_text)
                 day = day + int(re.sub("w", "", temp[0])) * 7
-        if len(re.findall(" inf ", message_text)):
+        if any(re.findall(" inf ", message_text)):
                 day = 367
         return hour, day
 
@@ -572,7 +572,8 @@ def mute_gen_duration_message(hour, day):
                 else:
                         duration = str(hour) + " hours"
         if day>0:
-                if hour>0: duration = duration + " "
+                if hour>0:
+                        duration = duration + " "
                 if day==1:
                         duration = duration + str(day) + " day"
                 else:
@@ -583,15 +584,15 @@ def mute_gen_duration_message(hour, day):
 
 def mute_parse_comment_message(message_text):
         comment = message_text.replace("/mute ", "")
-        if len(re.findall(" [0-9]{1,3}h ", message_text)):
+        if any(re.findall(" [0-9]{1,3}h ", message_text)):
                 comment = re.sub("[0-9]{1,3}h ", "", comment)
-        if len(re.findall(" [0-9]{1,3}d ", message_text)):
+        if any(re.findall(" [0-9]{1,3}d ", message_text)):
                 comment = re.sub("[0-9]{1,3}d ", "", comment)
-        if len(re.findall(" [0-9]{1,3}w ", message_text)):
+        if any(re.findall(" [0-9]{1,3}w ", message_text)):
                 comment = re.sub("[0-9]{1,3}w ", "", comment)
-        if len(re.findall(" inf ", message_text)):
+        if any(re.findall(" inf ", message_text)):
                 comment = re.sub("inf ", "", comment)
-        if len(re.findall("[a-zA-Z0-9]", comment))==0:
+        if any(re.findall("[a-zA-Z0-9]", comment))==0:
                 comment = "not found"
         return comment
 
