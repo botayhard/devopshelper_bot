@@ -1,6 +1,6 @@
 future>=0.16.0
 certifi
 tornado>=5.1
-cryptography
+cryptography>=3.4.7
 pysocks
 python-telegram-bot

@@ -829,26 +829,27 @@ dispatcher.add_handler(MessageHandler(Filters.status_update.left_chat_member, de
 
 
 ## Delete spam message and Ban spamer with admin button
-def delete_ban_button(update, context):
-        query = update.callback_query
-        query.answer()
-        callback_data = query.message.reply_markup.inline_keyboard[0][0].callback_data
-        chat_id = int(callback_data.split()[1])
-        user_id = int(callback_data.split()[2])
-        message_id = int(callback_data.split()[3])
-        admin_username = query.from_user.username
-### i see no reason to double check
-#        section = str(chat_id)
-#        in_section = section in config.sections()
-#        command_name = inspect.currentframe().f_code.co_name
-#        feature_flag = config.get(section, command_name) == 'on'
-#        if in_section and feature_flag:
-        context.bot.delete_message(chat_id=chat_id, message_id=message_id)
-        context.bot.kick_chat_member(chat_id=chat_id, user_id=user_id)
-        query.edit_message_text(text="Approved by @"+admin_username)
+### Disable until create integration with spam bot from JS developers
+# def delete_ban_button(update, context):
+#         query = update.callback_query
+#         query.answer()
+#         callback_data = query.message.reply_markup.inline_keyboard[0][0].callback_data
+#         chat_id = int(callback_data.split()[1])
+#         user_id = int(callback_data.split()[2])
+#         message_id = int(callback_data.split()[3])
+#         admin_username = query.from_user.username
+# ### i see no reason to double check
+# #        section = str(chat_id)
+# #        in_section = section in config.sections()
+# #        command_name = inspect.currentframe().f_code.co_name
+# #        feature_flag = config.get(section, command_name) == 'on'
+# #        if in_section and feature_flag:
+#         context.bot.delete_message(chat_id=chat_id, message_id=message_id)
+#         context.bot.kick_chat_member(chat_id=chat_id, user_id=user_id)
+#         query.edit_message_text(text="Approved by @"+admin_username)
 
-button_spam_handler = CallbackQueryHandler(delete_ban_button, pattern='spam[\s\S]+', run_async=True)
-dispatcher.add_handler(button_spam_handler)
+# button_spam_handler = CallbackQueryHandler(delete_ban_button, pattern='spam[\s\S]+', run_async=True)
+# dispatcher.add_handler(button_spam_handler)
 
 def main():
         db.setup()

@@ -8,7 +8,9 @@ Was published from private repo on version `v2.1.0`
 
 ## Badges
 
-[![Known Vulnerabilities](https://snyk.io/test/github/Asgoret/devopshelper_bot/badge.svg)](https://snyk.io/test/github/Asgoret/devopshelper_bot) [![CodeFactor](https://www.codefactor.io/repository/github/asgoret/devopshelper_bot/badge)](https://www.codefactor.io/repository/github/asgoret/devopshelper_bot)
+[![CodeFactor](https://www.codefactor.io/repository/github/asgoret/devopshelper_bot/badge)](https://www.codefactor.io/repository/github/asgoret/devopshelper_bot)
+[![Known Vulnerabilities](https://snyk.io/test/github/Asgoret/devopshelper_bot/badge.svg)](https://snyk.io/test/github/Asgoret/devopshelper_bot)
+[![BCH compliance](https://bettercodehub.com/edge/badge/Asgoret/devopshelper_bot?branch=master)](https://bettercodehub.com/)
 
 ## Realese policy
 
