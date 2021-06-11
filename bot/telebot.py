@@ -72,18 +72,24 @@ def tasks(update, context):
 tasks_handler = CommandHandler('tasks', tasks, run_async=True)
 dispatcher.add_handler(tasks_handler)
 
-## Send user starter kit
-def starter(update, context):
+
+## Support functions for kits
+def kits_base(update,command_name):
         section = str(update.message.chat.id)
         try:
                 username = re.sub("[_]", "\_", update.message.from_user.username)
         except TypeError:
                 username = None
         in_section = section in config.sections()
-        command_name = inspect.currentframe().f_code.co_name
         feature_flag = config.get(section, command_name) == 'on'
         root_url = config.get('shared','root_url')
         channel_specify = config.get(section, 'study')
+        return (section, username, in_section, feature_flag, root_url, channel_specify)
+
+## Send user starter kit
+def starter(update, context):
+        command_name = inspect.currentframe().f_code.co_name
+        section, username, in_section, feature_flag, root_url, channel_specify = kits_base(update, command_name)
         starter = config.get(section, 'starter_filename')
         url = root_url + channel_specify + "/" + starter
         user_id = update.message.from_user.id
@@ -114,16 +120,8 @@ dispatcher.add_handler(starter_handler)
 
 ## Send user middle kit
 def middle(update, context):
-        section = str(update.message.chat.id)
-        try:
-                username = re.sub("[_]", "\_", update.message.from_user.username)
-        except TypeError:
-                username = None
-        in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
-        feature_flag = config.get(section, command_name) == 'on'
-        root_url = config.get('shared','root_url')
-        channel_specify = config.get(section, 'study')
+        section, username, in_section, feature_flag, root_url, channel_specify = kits_base(update, command_name)
         middle = config.get(section, 'middle_filename')
         url = root_url + channel_specify + "/" + middle
         user_id = update.message.from_user.id
@@ -188,16 +186,8 @@ dispatcher.add_handler(hrman_handler)
 
 ## Send user tips for certifications
 def cert(update, context):
-        section = str(update.message.chat.id)
-        try:
-                username = re.sub("[_]", "\_", update.message.from_user.username)
-        except TypeError:
-                username = None
-        in_section = section in config.sections()
         command_name = inspect.currentframe().f_code.co_name
-        feature_flag = config.get(section, command_name) == 'on'
-        root_url = config.get('shared','root_url')
-        channel_specify = config.get(section, 'study')
+        section, username, in_section, feature_flag, root_url, channel_specify = kits_base(update, command_name)
         certification = config.get(section, 'certification_filename')
         url = root_url + channel_specify + "/" + certification
         user_id = update.message.from_user.id
