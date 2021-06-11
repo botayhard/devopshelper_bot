@@ -1,5 +1,4 @@
 import logging
-import sys
 import datetime
 import configparser
 import argparse
@@ -8,9 +7,8 @@ import re
 import shlex
 from mwt import MWT
 from dbhelper import DBHelper
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove, ChatPermissions
-from telegram.ext import MessageHandler, Filters, CommandHandler, Updater, CallbackQueryHandler
-from telegram.ext.dispatcher import run_async
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ChatPermissions
+from telegram.ext import MessageHandler, Filters, CommandHandler, Updater
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -774,14 +772,14 @@ def jobs(update, context):
         matches_job = match_job.search(update.message.reply_to_message.text)
         matches_work = match_work.search(update.message.reply_to_message.text)
         rss_link = re.sub("@", "https://t.me/", job_channels[0])
-        if matches_work != None: 
+        if matches_work is not None: 
                 text_to_publish = "[Резюме]" + "https://t.me/"+ str(update.message.chat.username)+"/"+ str(update.message.reply_to_message.message_id) \
                         + " было опубилковано в " + "[RSS канале]" + "(" + rss_link + ")"
-        elif matches_job != None:
+        elif matches_job is not None:
                 text_to_publish = "[Вакансия]" "https://t.me/"+ str(update.message.chat.username)+"/"+ str(update.message.reply_to_message.message_id) \
                         + " была опубилкована в " + "[RSS канале]" + "(" + rss_link + ")"
         if in_section and feature_flag and admins:
-                if matches_job == None and matches_work == None:
+                if matches_job is None and matches_work is None:
                         context.bot.send_message(chat_id=update.message.chat.id, reply_to_message_id=update.message.reply_to_message.message_id, \
                                 text="В Вашем посте отсуствует тег #вакансия или #резюме. Невозможно определить тип поста.")
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
