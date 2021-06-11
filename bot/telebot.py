@@ -5,6 +5,7 @@ import configparser
 import argparse
 import inspect
 import re
+import shlex
 from mwt import MWT
 from dbhelper import DBHelper
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ReplyKeyboardRemove, ChatPermissions
@@ -490,7 +491,7 @@ def man(update, context):
                 except TypeError:
                         f = open("helps/" + config.get(section, 'commands_list') + "/commands.txt", "r")
                         context.bot.send_message(chat_id=update.message.chat_id, text="[" + first_name + "](tg://user?id=" + user_id + ")" + \
-                        + "\n" + f.read(), parse_mode='Markdown', disable_web_page_preview=True)
+                        "\n" + f.read(), parse_mode='Markdown', disable_web_page_preview=True)
                         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 man_handler = CommandHandler('man', man, run_async=True)
@@ -642,6 +643,55 @@ def job(update, context):
 job_handler = CommandHandler('job', job, run_async=True)
 dispatcher.add_handler(job_handler)
 
+## New Post job opportunity into channel
+def jobs(update, context):
+        section = str(update.message.chat.id)
+        in_section = section in config.sections()
+        command_name = inspect.currentframe().f_code.co_name
+        feature_flag = config.get(section, command_name) == 'on'
+        admins = update.message.from_user.id in get_admin_ids(context, update.message.chat_id)
+        user_id = update.message.from_user.id
+        first_name = re.sub("[_]", "\_", update.message.from_user.first_name)
+        first_name = re.sub("[*]", "\*", first_name)
+        first_name = re.sub("[`]", "\`", first_name)
+        first_name = re.sub("[[]", "\[", first_name)
+        job_rss = config.get(section, 'job_rss')
+        job_channels = shlex.split(job_rss)
+        match_job = re.compile("#вакансия", re.IGNORECASE)
+        match_work = re.compile("#резюме", re.IGNORECASE)
+        matches_job = match_job.search(update.message.reply_to_message.text)
+        matches_work = match_work.search(update.message.reply_to_message.text)
+        rss_link = re.sub("@", "https://t.me/", job_channels[0])
+        if matches_work != None: 
+                text_to_publish = "[Резюме]" + "https://t.me/"+ str(update.message.chat.username)+"/"+ str(update.message.reply_to_message.message_id) \
+                        + " было опубилковано в " + "[RSS канале]" + "(" + rss_link + ")"
+        elif matches_job != None:
+                text_to_publish = "[Вакансия]" "https://t.me/"+ str(update.message.chat.username)+"/"+ str(update.message.reply_to_message.message_id) \
+                        + " была опубилкована в " + "[RSS канале]" + "(" + rss_link + ")"
+        if in_section and feature_flag and admins:
+                if matches_job == None and matches_work == None:
+                        context.bot.send_message(chat_id=update.message.chat.id, reply_to_message_id=update.message.reply_to_message.message_id, \
+                                text="В Вашем посте отсуствует тег #вакансия или #резюме. Невозможно определить тип поста.")
+                        context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
+                else:
+                        if str(update.message.reply_to_message.from_user.username) != "None":
+                                for i in job_channels:
+                                        context.bot.send_message(chat_id=i, text="Publisher: " + "@" + str(update.message.reply_to_message.from_user.username) + "\n" +  \
+                                                str(update.message.reply_to_message.text), parse_mode='Markdown', disable_web_page_preview=True)
+                                context.bot.send_message(chat_id=update.message.chat_id, reply_to_message_id=update.message.reply_to_message.message_id, \
+                                        text=text_to_publish, parse_mode='Markdown', disable_web_page_preview=True)
+                                context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
+                        elif str(update.message.reply_to_message.from_user.username) == "None":
+                                for i in job_channels:
+                                        context.bot.send_message(chat_id=i, text="Publisher: " + "[" + first_name + "](tg://user?id=" + str(user_id) + ")" + "\n" +  \
+                                                str(update.message.reply_to_message.text), parse_mode='Markdown', disable_web_page_preview=True)
+                                context.bot.send_message(chat_id=update.message.chat_id, reply_to_message_id=update.message.reply_to_message.message_id, \
+                                        text=text_to_publish, parse_mode='Markdown', disable_web_page_preview=True)
+                                context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
+
+jobs_handler = CommandHandler('jobs', jobs, run_async=True)
+dispatcher.add_handler(jobs_handler)
+
 ## Get chat number
 def idnumber(update, context):
         admins = update.message.from_user.id in get_admin_ids(context, update.message.chat_id)
@@ -664,7 +714,6 @@ def delete_service_message(update, context):
 
 dispatcher.add_handler(MessageHandler(Filters.status_update.new_chat_members, delete_service_message, run_async=True))
 dispatcher.add_handler(MessageHandler(Filters.status_update.left_chat_member, delete_service_message, run_async=True))
-
 
 def main():
         db.setup()
