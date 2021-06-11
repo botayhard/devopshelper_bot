@@ -11,6 +11,8 @@ Was published from private repo on version `v2.1.0`
 [![CodeFactor](https://www.codefactor.io/repository/github/asgoret/devopshelper_bot/badge)](https://www.codefactor.io/repository/github/asgoret/devopshelper_bot)
 [![Known Vulnerabilities](https://snyk.io/test/github/Asgoret/devopshelper_bot/badge.svg)](https://snyk.io/test/github/Asgoret/devopshelper_bot)
 [![BCH compliance](https://bettercodehub.com/edge/badge/Asgoret/devopshelper_bot?branch=master)](https://bettercodehub.com/)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/Asgoret/devopshelper_bot.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Asgoret/devopshelper_bot/alerts/)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/Asgoret/devopshelper_bot.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Asgoret/devopshelper_bot/context:python)
 
 ## Realese policy
 
