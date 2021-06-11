@@ -14,7 +14,6 @@ Was published from private repo on version `v2.1.0`
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/Asgoret/devopshelper_bot.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Asgoret/devopshelper_bot/alerts/)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/Asgoret/devopshelper_bot.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Asgoret/devopshelper_bot/context:python)
 
-
 ## Realese policy
 
 For example `v1.1.0`.
