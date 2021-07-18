@@ -1,0 +1,9 @@
+apiVersion: skaffold/v2beta19
+kind: Config
+build:
+  artifacts:
+  - image: devops_helper_bot_dev
+deploy:
+  kustomize:
+    paths: 
+      - "."

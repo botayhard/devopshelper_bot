@@ -25,7 +25,6 @@ parser.add_argument("-e","--environment", dest="environment", type=str,default="
 args = parser.parse_args()
 bottoken = args.bottoken
 environment = args.environment
-
 config = configparser.ConfigParser()
 # config.read('config.ini')
 config.read(environment)
