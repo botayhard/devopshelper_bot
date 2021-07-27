@@ -1,8 +1,10 @@
 resources:
-  - ./skaffold/k8s-dev.yaml
+  - ./skaffold/k8s-namespace.yaml
   - ./skaffold/k8s-secret.yaml
+  - ./skaffold/k8s-dev.yaml
 
 configMapGenerator:
   - name: bot-config
+    namespace: bot
     files:
     - config_dev.ini=./dev/config_dev.ini

@@ -3,7 +3,10 @@ kind: Config
 build:
   artifacts:
   - image: devops_helper_bot_dev
-deploy:
-  kustomize:
-    paths: 
-      - "."
+profiles:
+  - name: dev
+    deploy:
+      kubeContext: minikube
+      kustomize:
+        paths: 
+          - "."
