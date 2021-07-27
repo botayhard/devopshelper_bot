@@ -9,4 +9,4 @@ profiles:
       kubeContext: minikube
       kustomize:
         paths: 
-          - "."
+          - "k8s/environments/dev"
