@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devopshelper-bot
+  namespace: bot
+  labels:
+    app: devopshelper-bot
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: devopshelper-bot
+  template:
+    metadata:
+      labels:
+        app: devopshelper-bot
+    spec:
+      containers:
+      - name: bot
+        image: devopshelper_bot
+        env:
+        - name: botToken
+          valueFrom:
+            secretKeyRef:
+              name: bot-dev-token
+              key: botToken
+        - name: envFile
+          value: /tmp/config_dev.ini
+        volumeMounts:
+          - name: config-volume
+            mountPath: /tmp
+      volumes:
+        - name: config-volume
+          configMap:
+            name: bot-config

@@ -1,6 +1,10 @@
 __pycache__
 .vscode
 ./bot/__pycache__
-dev
+/dev
 todo.sqlite
 .DS_Store
+skaffold-study
+k8s/environments/dev/k8s-secret.yaml
+k8s/environments/dev/config_dev.ini
+k8s/environments/prod/k8s-secret.yaml
