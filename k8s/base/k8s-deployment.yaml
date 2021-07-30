@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: devops-helper-bot-dev
+  name: devopshelper-bot
   namespace: bot
   labels:
-    app: devops-helper-bot-dev
+    app: devopshelper-bot
 spec:
   replicas: 1
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: devops-helper-bot-dev
+      app: devopshelper-bot
   template:
     metadata:
       labels:
-        app: devops-helper-bot-dev
+        app: devopshelper-bot
     spec:
       containers:
       - name: bot
-        image: devops_helper_bot_dev
+        image: devopshelper_bot
         env:
         - name: botToken
           valueFrom:

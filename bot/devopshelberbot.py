@@ -616,7 +616,7 @@ def job(update, context):
             context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
         else:
             for i in job_checks[3]:
-                context.bot.send_message(chat_id=i, text="Publisher: " + triggered_user + "\n" + "Discussion in: @" + str(update.message.chat.username) + "\n" + job_checks[4], 
+                context.bot.send_message(chat_id=i, text="Publisher: " + triggered_user + "\n" + job_checks[4], 
                     parse_mode='MarkdownV2', disable_web_page_preview=True)
             context.bot.send_message(chat_id=update.message.chat_id, reply_to_message_id=update.message.reply_to_message.message_id, \
                     text=text_to_publish, parse_mode='MarkdownV2', disable_web_page_preview=True)
