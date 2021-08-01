@@ -11,6 +11,6 @@
 \-`/course` \-send to user list list of courses
 \-`/cert` \-send user list of certification tips & tricks
 \-`/relocate` \-send user list of relocate chats and channels
-\-`/report` \-forward replied message to admin chat and send link of replied message for fast-navigation \(works on replied message\)
+\-`/report` \-forward replied message to admin chat and send link of replied message for fast\-navigation \(works on replied message\)
 \-`/summon` \-summon HR to DevOps Jobs chat \(works on replied message\)
 \-`/hrman` \-send HR man for user
