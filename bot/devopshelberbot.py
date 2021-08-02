@@ -62,6 +62,26 @@ class Base:
         self.hour = int()
         self.day = int()
         self.duration=str()
+        self.esc_map = {
+        "_" : r"\_",
+        "*" : r"\*",
+        "[" : r"\[",
+        "]" : r"\]",
+        "(" : r"\(",
+        ")" : r"\)",
+        "~" : r"\~",
+        "`" : r"\`",
+        ">" : r"\>",
+        "#" : r"\#",
+        "+" : r"\+",
+        "-" : r"\-",
+        "=" : r"\=",
+        "|" : r"\|",
+        "{" : r"\{",
+        "}" : r"\}",
+        "." : r"\.",
+        "!" : r"\!"
+        }
 
     def features_state(self, update,command_name):
         self.section = str(update.message.chat.id)
@@ -156,8 +176,13 @@ class Base:
         matches_work = match_work.search(update.message.reply_to_message.text)
         rss_link = re.sub("@", "https://t.me/", job_channels[0])
         msg = str(update.message.reply_to_message.text)
-        escaping = re.escape(msg)
-        return matches_job, matches_work, rss_link, job_channels, escaping
+        escTable= msg.maketrans(self.esc_map)
+        escMsg = msg.translate(escTable)
+        user_id = update.message.reply_to_message.from_user.mention_markdown_v2()
+        ChatUsername = str(update.message.chat.username)
+        escTable= ChatUsername.maketrans(self.esc_map)
+        escChatUsername = ChatUsername.translate(escTable)
+        return matches_job, matches_work, rss_link, job_channels, escMsg, user_id, escChatUsername
 
     def mute_variables(self, update):
         self.section = str(update.message.chat.id)
@@ -165,11 +190,14 @@ class Base:
         restrict = ChatPermissions(can_send_messages=False, can_send_media_messages=False, can_send_other_messages=False, can_add_web_page_previews=False)
         resUser = str(update.message.reply_to_message.from_user.first_name)
         escape_resUser = re.escape(resUser)
+        escTableUsername= escape_resUser.maketrans(self.esc_map)
+        escUsername = escape_resUser.translate(escTableUsername)
         user_id = update.message.reply_to_message.from_user.id
         muted_user = update.message.reply_to_message.from_user.mention_markdown_v2()
-        reChatUsername = str(update.message.chat.username)
-        esChatUsername = "@" + re.escape(reChatUsername)
-        return admin_chat, restrict, escape_resUser, user_id, muted_user, esChatUsername
+        ChatUsername = str(update.message.chat.username)
+        escTable= ChatUsername.maketrans(self.esc_map)
+        escChatUsername = ChatUsername.translate(escTable)
+        return admin_chat, restrict, escUsername, user_id, muted_user, escChatUsername
 
     def mute_parse_date(self, update):
         self.message_text = update.message.text
@@ -605,10 +633,10 @@ def job(update, context):
     job_checks = base.job_variables(update)
     if job_checks[1] is not None: 
         text_to_publish = "[Резюме]" + "(https://t\.me/"+ str(update.message.chat.username) + "/" + str(update.message.reply_to_message.message_id) + ")" \
-            + " было опубилковано в " + "[RSS канале]" + "(" + job_checks[2] + ")"
+            + " было опубликована в " + "[RSS канале]" + "(" + job_checks[2] + ")"
     elif job_checks[0] is not None:
         text_to_publish = "[Вакансия]" + "(https://t\.me/"+ str(update.message.chat.username)+"/"+ str(update.message.reply_to_message.message_id) + ")" \
-            + " была опубилкована в " + "[RSS канале]" + "(" + job_checks[2] + ")"
+            + " была опубликована в " + "[RSS канале]" + "(" + job_checks[2] + ")"
     if feature_status and admins:
         if job_checks[0] is None and job_checks[1] is None:
             context.bot.send_message(chat_id=update.message.chat.id, reply_to_message_id=update.message.reply_to_message.message_id, \
@@ -616,7 +644,7 @@ def job(update, context):
             context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
         else:
             for i in job_checks[3]:
-                context.bot.send_message(chat_id=i, text="Publisher: " + triggered_user + "\n" + job_checks[4], 
+                context.bot.send_message(chat_id=i, text="Публикатор: " + job_checks[5] + "\n"+ "Обсуждение вакансии в чате @" + job_checks[6] + "\n" + job_checks[4], 
                     parse_mode='MarkdownV2', disable_web_page_preview=True)
             context.bot.send_message(chat_id=update.message.chat_id, reply_to_message_id=update.message.reply_to_message.message_id, \
                     text=text_to_publish, parse_mode='MarkdownV2', disable_web_page_preview=True)
@@ -638,7 +666,7 @@ def mute(update, context):
         context.bot.restrict_chat_member(chat_id=update.message.chat_id, user_id=update.message.reply_to_message.from_user.id, \
             until_date=datetime.datetime.now() + datetime.timedelta(days=day, hours=hour), permissions = mute_vars[1])
         context.bot.send_message(chat_id=mute_vars[0], text="User " + mute_vars[4] + " was muted by admin " + triggered_user \
-            + " in chat "  + mute_vars[5] + "\n" + "Until: " + mute_until + "\nComment: " + comment, \
+            + " in chat @" + mute_vars[5] + "\n" + "Until: " + mute_until + "\nComment: " + comment, \
             parse_mode='MarkdownV2', disable_web_page_preview=True)
         context.bot.send_message(chat_id=update.message.chat_id, text="User " + mute_vars[4] + " muted\. \nReason: " + comment, \
             parse_mode='MarkdownV2', disable_web_page_preview=True, reply_to_message_id=update.message.message_id)
