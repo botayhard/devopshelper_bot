@@ -135,7 +135,7 @@ class Base:
             url = self.root_url + self.vacancy
             return url
         if command_name == 'ad':
-            url = self.root_url + self.coc
+            url = self.root_url + self.ad
             return url
         if command_name == 'chats':
             url = self.root_url + self.chats
