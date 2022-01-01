@@ -633,7 +633,7 @@ def job(update, context):
     job_checks = base.job_variables(update)
     if job_checks[1] is not None: 
         text_to_publish = "[Резюме]" + "(https://t\.me/"+ str(update.message.chat.username) + "/" + str(update.message.reply_to_message.message_id) + ")" \
-            + " было опубликована в " + "[RSS канале]" + "(" + job_checks[2] + ")"
+            + " было опубликовано в " + "[RSS канале]" + "(" + job_checks[2] + ")"
     elif job_checks[0] is not None:
         text_to_publish = "[Вакансия]" + "(https://t\.me/"+ str(update.message.chat.username)+"/"+ str(update.message.reply_to_message.message_id) + ")" \
             + " была опубликована в " + "[RSS канале]" + "(" + job_checks[2] + ")"
