@@ -1,5 +1,6 @@
 import time
 
+
 class MWT(object):
     """Memoize With Timeout"""
     _caches = {}
@@ -33,6 +34,7 @@ class MWT(object):
                 print("new")
                 v = self.cache[key] = f(*args,**kwargs),time.time()
             return v[0]
+
         func.func_name = f.__name__
 
         return func

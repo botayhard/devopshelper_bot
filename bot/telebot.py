@@ -31,12 +31,12 @@ config.read(environment)
 updater = Updater(token=bottoken, use_context=True)
 dispatcher = updater.dispatcher
 
+
 # Get admins list
 @MWT(timeout=60*60)
 def get_admin_ids(context, chat_id):
     """Returns a list of admin IDs for a given chat. Results are cached for 1 hour."""
     return [admin.user.id for admin in context.bot.get_chat_administrators(chat_id)]
-
 
 # User commands
 
@@ -69,8 +69,10 @@ def warn(update, context, args):
                         can_send_messages=False, can_send_media_messages=False, can_send_other_messages=False, \
                         can_add_web_page_previews=False, until_date=datetime.datetime.now() + datetime.timedelta(days=3))
 
+
 warn_handler = CommandHandler('warn', warn, pass_args=True, run_async=True)
 dispatcher.add_handler(warn_handler)
+
 
 ## Unwarn user
 def unwarn(update, context):
@@ -90,9 +92,9 @@ def unwarn(update, context):
                          reply_to_message_id=update.message.message_id)
                 context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 unwarn_handler = CommandHandler('unwarn', unwarn, run_async=True)
 dispatcher.add_handler(unwarn_handler)
-
 
 
 ## Delete spam message and Ban spamer with admin button
@@ -118,8 +120,10 @@ dispatcher.add_handler(unwarn_handler)
 # button_spam_handler = CallbackQueryHandler(delete_ban_button, pattern='spam[\s\S]+', run_async=True)
 # dispatcher.add_handler(button_spam_handler)
 
+
 def main():
         db.setup()
+
 
 if __name__ == '__main__':
     main()

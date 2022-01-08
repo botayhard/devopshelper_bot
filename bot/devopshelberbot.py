@@ -32,11 +32,13 @@ config.read(environment)
 updater = Updater(token=bottoken, use_context=True)
 dispatcher = updater.dispatcher
 
+
 # Get admins list
 @MWT(timeout=60*60)
 def get_admin_ids(context, chat_id):
     """Returns a list of admin IDs for a given chat. Results are cached for 1 hour."""
     return [admin.user.id for admin in context.bot.get_chat_administrators(chat_id)]
+
 
 class Base:
     def __init__(self):
@@ -236,10 +238,12 @@ class Base:
             comment = "without comment"
         return comment
 
+
 # Initiallaze main class
 base = Base()
 
 # User commands
+
 
 ## Studies commands
 ### Send user starter kit
@@ -262,8 +266,10 @@ def starter(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 starter_handler = CommandHandler('starter', starter, run_async=True)
 dispatcher.add_handler(starter_handler)
+
 
 ### Send user middle kit
 def middle(update, context):
@@ -285,8 +291,10 @@ def middle(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 middle_handler = CommandHandler('middle', middle, run_async=True)
 dispatcher.add_handler(middle_handler)
+
 
 ### Send user list of various courses
 def course(update, context):
@@ -306,8 +314,10 @@ def course(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 course_handler = CommandHandler('course', course, run_async=True)
 dispatcher.add_handler(course_handler)
+
 
 ### Send user tips for certifications
 def cert(update, context):
@@ -327,8 +337,10 @@ def cert(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 cert_handler = CommandHandler('cert', cert, run_async=True)
 dispatcher.add_handler(cert_handler)
+
 
 ### Send user test tasks
 def tasks(update, context):
@@ -348,10 +360,12 @@ def tasks(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 tasks_handler = CommandHandler('tasks', tasks, run_async=True)
 dispatcher.add_handler(tasks_handler)
 
 ## Common commands
+
 
 ### Send to user common tasks
 def hrman(update, context):
@@ -373,8 +387,10 @@ def hrman(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 hrman_handler = CommandHandler('hrman', hrman, run_async=True)
 dispatcher.add_handler(hrman_handler)
+
 
 ### Send user list of various relocate chats
 def relocate(update, context):
@@ -395,8 +411,10 @@ def relocate(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 relocate_handler = CommandHandler('relocate', relocate, run_async=True)
 dispatcher.add_handler(relocate_handler)
+
 
 ### Send use Code of Conduct
 def coc(update, context):
@@ -417,8 +435,10 @@ def coc(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 coc_handler = CommandHandler('coc', coc, run_async=True)
 dispatcher.add_handler(coc_handler)
+
 
 ### Send user job opportunity and cv publish rules
 def work(update, context):
@@ -440,8 +460,10 @@ def work(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 work_handler = CommandHandler('work', work, run_async=True)
 dispatcher.add_handler(work_handler)
+
 
 ### Send user advertising rules
 def ad(update, context):
@@ -462,8 +484,10 @@ def ad(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 ad_handler = CommandHandler('ad', ad, run_async=True)
 dispatcher.add_handler(ad_handler)
+
 
 ### Send user list of friendly chats
 def chats(update, context):
@@ -485,8 +509,10 @@ def chats(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 chats_handler = CommandHandler('chats', chats, run_async=True)
 dispatcher.add_handler(chats_handler)
+
 
 ### Send user events rules
 def events(update, context):
@@ -506,8 +532,10 @@ def events(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 events_handler = CommandHandler('events', events, run_async=True)
 dispatcher.add_handler(events_handler)
+
 
 ### User send report message to admins
 def report(update, context):
@@ -538,8 +566,10 @@ def report(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 report_handler = CommandHandler('report', report)
 dispatcher.add_handler(report_handler)
+
 
 ### User summon some HRs in thread
 def summon(update, context):
@@ -558,8 +588,10 @@ def summon(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 summon_handler = CommandHandler('summon', summon, run_async=True)
 dispatcher.add_handler(summon_handler)
+
 
 ### Send user bots man
 def man(update, context):
@@ -580,8 +612,10 @@ def man(update, context):
     else:
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 man_handler = CommandHandler('man', man, run_async=True)
 dispatcher.add_handler(man_handler)
+
 
 # Admin commands
 ## Get chat number
@@ -596,8 +630,10 @@ def idnumber(update, context):
     else: 
             context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 idnumber_handler = CommandHandler('idnumber', idnumber, run_async=True)
 dispatcher.add_handler(idnumber_handler)
+
 
 def move(update, context):
     command_name = inspect.currentframe().f_code.co_name
@@ -620,8 +656,10 @@ def move(update, context):
             context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
             context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.reply_to_message.message_id)
 
+
 move_handler = CommandHandler('move', move, run_async=True)
 dispatcher.add_handler(move_handler)
+
 
 ## Jobs
 def job(update, context):
@@ -649,8 +687,10 @@ def job(update, context):
                     text=text_to_publish, parse_mode='MarkdownV2', disable_web_page_preview=True)
             context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 jobs_handler = CommandHandler('job', job, run_async=True)
 dispatcher.add_handler(jobs_handler)
+
 
 def mute(update, context):
     command_name = inspect.currentframe().f_code.co_name
@@ -671,8 +711,10 @@ def mute(update, context):
             parse_mode='MarkdownV2', disable_web_page_preview=True, reply_to_message_id=update.message.message_id)
         context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
+
 mute_handler = CommandHandler('mute', mute, pass_args=True, run_async=True)
 dispatcher.add_handler(mute_handler)
+
 
 # Automate service actions
 ## Delete service messages
@@ -685,11 +727,14 @@ def delete_service_message(update, context):
         if in_section and feature_flag:
             context.bot.delete_message(chat_id=msg.chat.id,message_id=msg.message_id)
 
+
 dispatcher.add_handler(MessageHandler(Filters.status_update.new_chat_members, delete_service_message, run_async=True))
 dispatcher.add_handler(MessageHandler(Filters.status_update.left_chat_member, delete_service_message, run_async=True))
 
+
 def main():
         pass
+
 
 if __name__ == '__main__':
     main()
