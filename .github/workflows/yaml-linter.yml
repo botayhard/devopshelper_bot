@@ -30,4 +30,4 @@ jobs:
 
       - name: Lint with YAMLlint
         run: |
-          yamllint . --strict
+          yamllint . --strict --format standard
