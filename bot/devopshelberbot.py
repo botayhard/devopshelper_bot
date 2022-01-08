@@ -1074,7 +1074,7 @@ def job(update, context):
     command_name = inspect.currentframe().f_code.co_name
     feature_status = base.features_state(update, command_name)
     admins = base.is_admin(update, context)
-    triggered_user = base.user_data(update)
+    # triggered_user = base.user_data(update)
     job_checks = base.job_variables(update)
     if job_checks[1] is not None:
         text_to_publish = (
