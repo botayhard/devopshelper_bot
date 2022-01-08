@@ -9,8 +9,7 @@ on:  # yamllint disable-line rule:truthy
     branches:
       - master
   pull_request:
-    branches:
-      - master
+    branches-ignore: []
 
 jobs:
   build:
