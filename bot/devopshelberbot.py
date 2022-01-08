@@ -627,7 +627,7 @@ def idnumber(update, context):
             # context.bot.send_message(chat_id=update.message.chat_id,text="_Italic text_ from user " + triggered_user, parse_mode='MarkdownV2')
             context.bot.send_message(chat_id=update.message.chat_id, text=update.message.chat_id)
             context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
-    else: 
+    else:
             context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
 
 
@@ -668,7 +668,7 @@ def job(update, context):
     admins = base.is_admin(update, context)
     triggered_user = base.user_data(update)
     job_checks = base.job_variables(update)
-    if job_checks[1] is not None: 
+    if job_checks[1] is not None:
         text_to_publish = "[Резюме]" + "(https://t\.me/"+ str(update.message.chat.username) + "/" + str(update.message.reply_to_message.message_id) + ")" \
             + " было опубликована в " + "[RSS канале]" + "(" + job_checks[2] + ")"
     elif job_checks[0] is not None:
@@ -681,7 +681,7 @@ def job(update, context):
             context.bot.deleteMessage(chat_id=update.message.chat.id, message_id=update.message.message_id)
         else:
             for i in job_checks[3]:
-                context.bot.send_message(chat_id=i, text="Публикатор: " + job_checks[5] + "\n"+ "Обсуждение вакансии в чате @" + job_checks[6] + "\n" + job_checks[4], 
+                context.bot.send_message(chat_id=i, text="Публикатор: " + job_checks[5] + "\n"+ "Обсуждение вакансии в чате @" + job_checks[6] + "\n" + job_checks[4],
                     parse_mode='MarkdownV2', disable_web_page_preview=True)
             context.bot.send_message(chat_id=update.message.chat_id, reply_to_message_id=update.message.reply_to_message.message_id, \
                     text=text_to_publish, parse_mode='MarkdownV2', disable_web_page_preview=True)

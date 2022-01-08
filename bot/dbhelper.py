@@ -1,7 +1,7 @@
 import sqlite3
 
-class DBHelper:
 
+class DBHelper:
     def __init__(self, dbname="todo.sqlite"):
         self.dbname = dbname
         self.conn = sqlite3.connect(dbname, check_same_thread=False)
@@ -45,7 +45,7 @@ class DBHelper:
         for row in data:
             return row[0]
 
-    def delete_warn(self,user_id, user_username, warn):
+    def delete_warn(self, user_id, user_username, warn):
         stmt = "INSERT INTO users (id, username, warn) VALUES (?, ?, ?) ON CONFLICT(id) DO UPDATE SET id = excluded.id,warn = 0"
         args = (user_id, user_username, warn)
         self.conn.execute(stmt, args)
