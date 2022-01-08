@@ -39,7 +39,7 @@ class DBHelper:
     def count_warn(self, user_id):
         # stmt = "SELECT DISTINCT (warn) FROM users WHERE id=(?)"
         stmt = "SELECT warn FROM users WHERE id IN (?)"
-        args = (user_id, )
+        args = (user_id,)
         self.conn.execute(stmt, args)
         data = self.conn.execute(stmt, args)
         for row in data:

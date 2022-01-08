@@ -3,10 +3,11 @@ import time
 
 class MWT(object):
     """Memoize With Timeout"""
+
     _caches = {}
     _timeouts = {}
 
-    def __init__(self,timeout=2):
+    def __init__(self, timeout=2):
         self.timeout = timeout
 
     def collect(self):
@@ -32,7 +33,7 @@ class MWT(object):
                     raise KeyError
             except KeyError:
                 print("new")
-                v = self.cache[key] = f(*args,**kwargs),time.time()
+                v = self.cache[key] = f(*args, **kwargs), time.time()
             return v[0]
 
         func.func_name = f.__name__
