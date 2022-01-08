@@ -4,11 +4,9 @@ import configparser
 import argparse
 import inspect
 import re
-import shlex
 from mwt import MWT
 from dbhelper import DBHelper
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton, ChatPermissions
-from telegram.ext import MessageHandler, Filters, CommandHandler, Updater
+from telegram.ext import CommandHandler, Updater
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
