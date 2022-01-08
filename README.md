@@ -72,7 +72,8 @@ __User commands:__
 
 | Feature            | Status |
 | ------------------ | -------|
-| CI/CD              | []     |
+| **CI**/CD          | [x]    |
+| CI/**CD**          | [ ]    |
 | Healtchecks        | []     |
 | Readnes Probe      | []     |
 | Livelenes probe    | []     |
