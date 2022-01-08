@@ -8,7 +8,7 @@ ENV botToken=mock
 ENV envFile=mock
 
 RUN addgroup -S ${group} && adduser -S ${user} -G ${group}; \
-    apk add --no-cache gcc g++ musl-dev python3-dev libffi-dev openssl-dev cargo                  
+    apk add --no-cache gcc g++ musl-dev python3-dev libffi-dev openssl-dev cargo
 
 USER ${user}
 
@@ -18,7 +18,7 @@ RUN mkdir ./bot; \
     pip install --upgrade pip; \
     pip install setuptools --upgrade; \
     pip install --no-cache-dir -r requirements.txt
-    
+
 COPY ./bot /bot
 WORKDIR /bot
 
