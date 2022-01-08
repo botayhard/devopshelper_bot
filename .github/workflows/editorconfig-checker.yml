@@ -1,6 +1,6 @@
 ---
 
-name: Common style checks with editorconfig-checker
+name: Style checks with editorconfig-checker
 
 on:  # yamllint disable-line rule:truthy
   push:
@@ -11,7 +11,7 @@ on:  # yamllint disable-line rule:truthy
 
 jobs:
   build:
-    name: Stack linter
+    name: Run editorconfig-checker
     runs-on: ubuntu-latest
 
     steps:
