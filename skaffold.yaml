@@ -1,3 +1,5 @@
+---
+
 apiVersion: skaffold/v2beta19
 kind: Config
 profiles:
