@@ -6,7 +6,7 @@ profiles:
   - name: dev
     build:
       artifacts:
-      - image: devopshelper_bot
+        - image: devopshelper_bot
     deploy:
       kubeContext: minikube
       kustomize:
@@ -18,7 +18,7 @@ profiles:
         envTemplate:
           template: "{{.IMAGE_VERSION}}"
       artifacts:
-      - image: asgoret/devopshelper_bot
+        - image: asgoret/devopshelper_bot
       local:
         push: true
 
