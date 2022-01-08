@@ -13,13 +13,11 @@ ENV envFile=mock
 RUN addgroup --system ${APP_GROUP} && adduser --system --ingroup ${APP_GROUP} ${APP_USER}
 
 USER ${APP_USER}
-
 WORKDIR /home/${APP_USER}
+RUN mkdir ./bot
+
 COPY requirements.txt ./
-RUN mkdir ./bot; \
-    pip install --upgrade pip; \
-    pip install setuptools --upgrade; \
-    pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./bot /bot
 WORKDIR /bot
