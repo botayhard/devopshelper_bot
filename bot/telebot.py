@@ -61,7 +61,7 @@ def get_admin_ids(context, chat_id):
 
 # Administrator commands
 
-## Warn some user
+# - Warn some user
 def warn(update, context, args):
     user_id = update.message.reply_to_message.from_user.id
     user_username = update.message.reply_to_message.from_user.username
@@ -115,7 +115,7 @@ warn_handler = CommandHandler("warn", warn, pass_args=True, run_async=True)
 dispatcher.add_handler(warn_handler)
 
 
-## Unwarn user
+# - Unwarn user
 def unwarn(update, context):
     user_id = update.message.reply_to_message.from_user.id
     user_username = update.message.reply_to_message.from_user.username
@@ -149,8 +149,8 @@ unwarn_handler = CommandHandler("unwarn", unwarn, run_async=True)
 dispatcher.add_handler(unwarn_handler)
 
 
-## Delete spam message and Ban spamer with admin button
-### Disable until create integration with spam bot from JS developers
+# - Delete spam message and Ban spamer with admin button
+# -- Disable until create integration with spam bot from JS developers
 # def delete_ban_button(update, context):
 #         query = update.callback_query
 #         query.answer()
@@ -159,7 +159,7 @@ dispatcher.add_handler(unwarn_handler)
 #         user_id = int(callback_data.split()[2])
 #         message_id = int(callback_data.split()[3])
 #         admin_username = query.from_user.username
-# ### i see no reason to double check
+# # -- i see no reason to double check
 # #        section = str(chat_id)
 # #        in_section = section in config.sections()
 # #        command_name = inspect.currentframe().f_code.co_name
