@@ -21,9 +21,9 @@ Steps to reproduce the behavior:
 A clear and concise description of what you expected to happen.
 
 **Environment (please complete the following information):**
- - Python: [e.g. iOS]
- - Python telegram bot [e.g. chrome, safari]
- - Release [e.g. 22]
+  - Python: [e.g. iOS]
+  - Python telegram bot [e.g. chrome, safari]
+  - Release [e.g. 22]
 
 **Additional context**
 Add any other context about the problem here.

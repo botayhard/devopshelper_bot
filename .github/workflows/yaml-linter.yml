@@ -2,18 +2,17 @@
 
 ---
 
-name: Python best-practices
+name: YAML best-practices
 
 on:  # yamllint disable-line rule:truthy
   push:
     branches:
       - master
   pull_request:
-    branches:
-      - master
+    branches-ignore: []
 
 jobs:
-  python_linters:
+  build:
 
     runs-on: ubuntu-latest
 
@@ -27,13 +26,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install black==21.12b0 flake8==4.0.1
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install yamllint==1.26.3
 
-      - name: Lint with flake8
+      - name: Lint with YAMLlint
         run: |
-          flake8 . --show-source --statistics
-
-      - name: Lint with Black
-        run: |
-          black . --check --diff
+          yamllint . --strict --format standard

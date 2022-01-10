@@ -1,14 +1,16 @@
+---
+
 apiVersion: skaffold/v2beta19
 kind: Config
 profiles:
   - name: dev
     build:
       artifacts:
-      - image: devopshelper_bot
+        - image: devopshelper_bot
     deploy:
       kubeContext: minikube
       kustomize:
-        paths: 
+        paths:
           - "k8s/environments/dev"
   - name: prod
     build:
@@ -16,7 +18,6 @@ profiles:
         envTemplate:
           template: "{{.IMAGE_VERSION}}"
       artifacts:
-      - image: asgoret/devopshelper_bot
+        - image: asgoret/devopshelper_bot
       local:
         push: true
-
