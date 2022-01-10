@@ -1,3 +1,5 @@
+---
+
 resources:
   - ./k8s-namespace.yaml
   - ./k8s-deployment.yaml

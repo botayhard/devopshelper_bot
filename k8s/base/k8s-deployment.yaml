@@ -1,3 +1,5 @@
+---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -18,19 +20,19 @@ spec:
         app: devopshelper-bot
     spec:
       containers:
-      - name: bot
-        image: devopshelper_bot
-        env:
-        - name: botToken
-          valueFrom:
-            secretKeyRef:
-              name: bot-dev-token
-              key: botToken
-        - name: envFile
-          value: /tmp/config_dev.ini
-        volumeMounts:
-          - name: config-volume
-            mountPath: /tmp
+        - name: bot
+          image: devopshelper_bot
+          env:
+            - name: botToken
+              valueFrom:
+                secretKeyRef:
+                  name: bot-dev-token
+                  key: botToken
+            - name: envFile
+              value: /tmp/config_dev.ini
+          volumeMounts:
+            - name: config-volume
+              mountPath: /tmp
       volumes:
         - name: config-volume
           configMap:

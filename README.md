@@ -55,13 +55,13 @@ __User commands:__
 | Mute               | [x]    |
 | Starter Kit        | [x]    |
 | Middle Kit         | [x]    |
-| Senior Kit         | []     |
+| Senior Kit         | [ ]    |
 | Rules              | [x]    |
-| Antiforward filter | []     |
+| Antiforward filter | [ ]    |
 | Call HR            | [x]    |
-| Ban                | []     |
+| Ban                | [ ]    |
 | Warn counts        | [х]    |
-| Event message      | []     |
+| Event message      | [ ]    |
 | Man                | [x]    |
 | Job                | [x]    |
 | Course             | [x]    |
@@ -72,12 +72,13 @@ __User commands:__
 
 | Feature            | Status |
 | ------------------ | -------|
-| CI/CD              | []     |
-| Healtchecks        | []     |
-| Readnes Probe      | []     |
-| Livelenes probe    | []     |
-| Tests              | []     |
-| Databes            | []     |
-| Monitoring         | []     |
-| ML                 | []     |
-| Webhooks           | []     |
+| **CI**/CD          | [x]    |
+| CI/**CD**          | [ ]    |
+| Healtchecks        | [ ]    |
+| Readiness probe    | [ ]    |
+| Liveness probe     | [ ]    |
+| Tests              | [ ]    |
+| Database           | [ ]    |
+| Monitoring         | [ ]    |
+| ML                 | [ ]    |
+| Webhooks           | [ ]    |

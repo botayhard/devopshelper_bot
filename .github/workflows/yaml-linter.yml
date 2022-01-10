@@ -1,0 +1,33 @@
+# https://docs.github.com/actions/automating-builds-and-tests/building-and-testing-nodejs-or-python?langId=py
+
+---
+
+name: YAML best-practices
+
+on:  # yamllint disable-line rule:truthy
+  push:
+    branches:
+      - master
+  pull_request:
+    branches-ignore: []
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install yamllint==1.26.3
+
+      - name: Lint with YAMLlint
+        run: |
+          yamllint . --strict --format standard
