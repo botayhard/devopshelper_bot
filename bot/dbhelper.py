@@ -1,7 +1,7 @@
 import sqlite3
 
-class DBHelper:
 
+class DBHelper:
     def __init__(self, dbname="todo.sqlite"):
         self.dbname = dbname
         self.conn = sqlite3.connect(dbname, check_same_thread=False)
@@ -39,13 +39,13 @@ class DBHelper:
     def count_warn(self, user_id):
         # stmt = "SELECT DISTINCT (warn) FROM users WHERE id=(?)"
         stmt = "SELECT warn FROM users WHERE id IN (?)"
-        args = (user_id, )
+        args = (user_id,)
         self.conn.execute(stmt, args)
         data = self.conn.execute(stmt, args)
         for row in data:
             return row[0]
 
-    def delete_warn(self,user_id, user_username, warn):
+    def delete_warn(self, user_id, user_username, warn):
         stmt = "INSERT INTO users (id, username, warn) VALUES (?, ?, ?) ON CONFLICT(id) DO UPDATE SET id = excluded.id,warn = 0"
         args = (user_id, user_username, warn)
         self.conn.execute(stmt, args)
